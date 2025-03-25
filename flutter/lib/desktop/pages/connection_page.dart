@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hbb/consts.dart';
 import 'package:flutter_hbb/models/state_model.dart';
@@ -270,7 +270,13 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(); // Премахваме целия UI на десния панел
+        return Center(
+      child: SvgPicture.asset(
+        'assets/logo.svg',
+        width: 100,
+        height: 25,
+      ),
+    );
   }
 
   /// Callback за бутона за свързване (запазен, но не се използва в UI)
