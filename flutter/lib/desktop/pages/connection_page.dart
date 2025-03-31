@@ -273,8 +273,9 @@ class _ConnectionPageState extends State<ConnectionPage>
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 12),
-          child: Center(
+          padding: EdgeInsets.only(top: 12, left: 12),
+          child: Align(
+            alignment: Alignment.centerLeft,
             child: SvgPicture.asset(
               'assets/logo.svg',
               width: 100,
