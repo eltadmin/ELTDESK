@@ -279,8 +279,20 @@ class _ConnectionPageState extends State<ConnectionPage>
           Center(
             child: SvgPicture.asset(
               'assets/logo.svg',
-              width: 100,
-              height: 25,
+              width: 109.8,
+              height: 26,
+              colorBlendMode: BlendMode.srcOver,
+              errorBuilder: (context, error, stackTrace) {
+                print('Error loading logo: $error');
+                return Container(
+                  width: 109.8,
+                  height: 26,
+                  color: Colors.red,
+                  child: Center(
+                    child: Text('Error loading logo'),
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: 20),
