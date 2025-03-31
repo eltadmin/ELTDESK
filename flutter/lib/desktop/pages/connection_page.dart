@@ -270,27 +270,32 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: SvgPicture.asset(
-            'assets/logo.svg',
-            width: 100,
-            height: 25,
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: SvgPicture.asset(
+              'assets/logo.svg',
+              width: 100,
+              height: 25,
+            ),
           ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          translate("Your Desktop"),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        SizedBox(height: 10),
-        Text(
-          translate("desk_tip"),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ],
-    ).paddingAll(20);
+          SizedBox(height: 20),
+          Text(
+            translate("Your Desktop"),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          SizedBox(height: 10),
+          Text(
+            translate("desk_tip"),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ).paddingAll(20),
+    );
   }
 
   /// Callback за бутона за свързване (запазен, но не се използва в UI)
