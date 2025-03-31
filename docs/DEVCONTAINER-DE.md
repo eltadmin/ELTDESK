@@ -1,9 +1,8 @@
-
-Nach dem Start von Dev-Container im Docker-Container wird ein Linux-Binärprogramm im Debug-Modus erstellt.
+Nach dem Start von Dev-Container im Docker-Container wird ein Linux-BinÃ¤rprogramm im Debug-Modus erstellt.
 
 Derzeit bietet Dev-Container Linux- und Android-Builds sowohl im Debug- als auch im Release-Modus an.
 
-Nachfolgend finden Sie eine Tabelle mit Befehlen, die im Stammverzeichnis des Projekts ausgeführt werden müssen, um bestimmte Builds zu erstellen.
+Nachfolgend finden Sie eine Tabelle mit Befehlen, die im Stammverzeichnis des Projekts ausgefÃ¼hrt werden mÃ¼ssen, um bestimmte Builds zu erstellen.
 
 Kommando|Build-Typ|Modus
 -|-|-|
