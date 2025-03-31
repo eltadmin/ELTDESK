@@ -270,44 +270,27 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: SvgPicture.asset(
-              'assets/logo.svg',
-              width: 109.8,
-              height: 26,
-              colorBlendMode: BlendMode.srcOver,
-              errorBuilder: (context, error, stackTrace) {
-                print('Error loading logo: $error');
-                return Container(
-                  width: 109.8,
-                  height: 26,
-                  color: Colors.red,
-                  child: Center(
-                    child: Text('Error loading logo'),
-                  ),
-                );
-              },
-            ),
+    return Column(
+      children: [
+        Center(
+          child: SvgPicture.asset(
+            'assets/logo.svg',
+            width: 100,
+            height: 25,
           ),
-          SizedBox(height: 20),
-          Text(
-            translate("Your Desktop"),
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          SizedBox(height: 10),
-          Text(
-            translate("desk_tip"),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      ).paddingAll(20),
-    );
+        ),
+        SizedBox(height: 20),
+        Text(
+          translate("Your Desktop"),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        SizedBox(height: 10),
+        Text(
+          translate("desk_tip"),
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
+    ).paddingAll(20);
   }
 
   /// Callback за бутона за свързване (запазен, но не се използва в UI)
