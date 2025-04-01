@@ -272,15 +272,13 @@ class _ConnectionPageState extends State<ConnectionPage>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 12, left: 12),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: SvgPicture.asset(
-              'assets/logo.svg',
-              width: 100,
-              height: 25,
-            ),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(top: 12, left: 24),
+          child: SvgPicture.asset(
+            'assets/logo.svg',
+            width: 100,
+            height: 25,
           ),
         ),
         SizedBox(height: 20),
