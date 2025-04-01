@@ -284,17 +284,21 @@ class _ConnectionPageState extends State<ConnectionPage>
           ),
         ),
         SizedBox(height: 20),
-        Text(
-          translate("Your Desktop"),
-          style: Theme.of(context).textTheme.titleLarge,
+        Center(
+          child: Text(
+            translate("Your Desktop"),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         SizedBox(height: 10),
-        Text(
-          translate("desk_tip"),
-          style: Theme.of(context).textTheme.bodySmall,
+        Center(
+          child: Text(
+            translate("desk_tip"),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
         ),
       ],
-    ).paddingAll(20);
+    );
   }
 
   /// Callback за бутона за свързване (запазен, но не се използва в UI)
