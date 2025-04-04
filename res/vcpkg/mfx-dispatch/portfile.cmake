@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO lu-zero/mfx_dispatch
     REF 1.35.1
-    SHA512 0
+    SHA512 12517338342d3e653043a57e290eb9cffd190aede0c3a3948956f1c7f12f0ea859361cf3e534ab066b96b1c211f68409c67ef21fd6d76b68cc31daef541941b0
     HEAD_REF master
     PATCHES
     fix-unresolved-symbol.patch
