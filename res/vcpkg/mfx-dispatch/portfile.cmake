@@ -7,8 +7,8 @@ vcpkg_from_github(
     PATCHES
     fix-unresolved-symbol.patch
     fix-pkgconf.patch
-    0003-upgrade-cmake-3.14.patch
     ${MISSING_CSTDINT_IMPORT_PATCH}
+    0003-upgrade-cmake-3.14.patch
 )
 
 if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
