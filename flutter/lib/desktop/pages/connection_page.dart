@@ -270,30 +270,36 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(top: 12, left: 24),
-          child: SvgPicture.asset(
-            'assets/logo.svg',
-            width: 100,
-            height: 25,
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: EdgeInsets.only(top: 12, left: 12),
+            child: SvgPicture.asset(
+              'assets/logo.svg',
+              width: 100,
+              height: 25,
+            ),
           ),
         ),
-        SizedBox(height: 20),
-        Center(
-          child: Text(
-            translate("Your Desktop"),
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-        ),
-        SizedBox(height: 10),
-        Center(
-          child: Text(
-            translate("desk_tip"),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+        Column(
+          children: [
+            SizedBox(height: 60), // Add space for the logo
+            Center(
+              child: Text(
+                translate("Your Desktop"),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: Text(
+                translate("desk_tip"),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          ],
         ),
       ],
     );
