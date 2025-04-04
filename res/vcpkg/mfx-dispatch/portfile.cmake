@@ -5,9 +5,9 @@ vcpkg_from_github(
     SHA512 12517338342d3e653043a57e290eb9cffd190aede0c3a3948956f1c7f12f0ea859361cf3e534ab066b96b1c211f68409c67ef21fd6d76b68cc31daef541941b0
     HEAD_REF master
     PATCHES
-    fix-unresolved-symbol.patch
-    fix-pkgconf.patch
     0003-upgrade-cmake-3.14.patch
+    fix-pkgconf.patch
+    fix-unresolved-symbol.patch
     ${MISSING_CSTDINT_IMPORT_PATCH}
 )
 
