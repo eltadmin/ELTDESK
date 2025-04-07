@@ -25,7 +25,7 @@ RustDesk 또는 종속성에 대한 기여는 GitHub Pull Request 형태로 이�
 Git에서는 `git commit` 명령어에 `-s` 옵션을 사용해 서명을 추가할 수 있습니다.
 
 - PR이 검토되지 않거나 특정 리뷰어가 필요하면, 
-<br/> PR이나 댓글에서 리뷰어를 태그하거나 [이메일](mailto:info@rustdesk.com)로 리뷰를 요청할 수 있습니다.
+<br/> PR이나 댓글에서 리뷰어를 태그하거나 [이메일](mailto:info@eltrade.com)로 리뷰를 요청할 수 있습니다.
 
 - 수정된 버그나 추가된 기능과 관련된 테스트 코드를 포함해주세요.
 
