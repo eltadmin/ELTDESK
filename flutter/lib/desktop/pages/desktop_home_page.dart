@@ -61,10 +61,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     return Scaffold(
       body: Row(
         children: [
-          buildLeftPane(context),
-          Expanded(
-            child: buildRightPane(context),
-          ),
+          Expanded(child: buildLeftPane(context)),
         ],
       ),
     );

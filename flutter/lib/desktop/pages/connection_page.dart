@@ -33,7 +33,6 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
   Timer? _updateTimer;
 
   double get em => 14.0;
-  double? get height => bind.isIncomingOnly() ? null : em * 3;
 
   @override
   void initState() {
@@ -51,102 +50,30 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isIncomingOnly = bind.isIncomingOnly();
-    startServiceWidget() => Offstage(
-          offstage: !_svcStopped.value,
-          child: InkWell(
-                  onTap: () async {
-                    await start_service(true);
-                  },
-                  child: Text(translate("Start service"),
-                      style: TextStyle(
-                          decoration: TextDecoration.underline, fontSize: em)))
-              .marginOnly(left: em),
-        );
-
-    setupServerWidget() => Flexible(
-          child: Offstage(
-            offstage: !(!_svcStopped.value &&
-                stateGlobal.svcStatus.value == SvcStatus.ready &&
-                _svcIsUsingPublicServer.value),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(', ', style: TextStyle(fontSize: em)),
-                Flexible(
-                  child: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            translate('setup_server_tip'),
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: em),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+    return Positioned(
+      left: 12,
+      bottom: 12,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 8,
+            width: 8,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: stateGlobal.svcStatus.value == SvcStatus.ready
+                  ? Color.fromARGB(255, 50, 190, 166) // Зелено
+                  : Color.fromARGB(255, 224, 79, 95), // Червено
             ),
+          ).marginSymmetric(horizontal: em),
+          Text(
+            stateGlobal.svcStatus.value == SvcStatus.ready
+                ? translate("Свързан")
+                : translate("Няма връзка със сървъра"),
+            style: TextStyle(fontSize: em),
           ),
-        );
-
-    basicWidget() => Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 8,
-              width: 8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: _svcStopped.value ||
-                        stateGlobal.svcStatus.value == SvcStatus.connecting
-                    ? kColorWarn
-                    : (stateGlobal.svcStatus.value == SvcStatus.ready
-                        ? Color.fromARGB(255, 50, 190, 166)
-                        : Color.fromARGB(255, 224, 79, 95)),
-              ),
-            ).marginSymmetric(horizontal: em),
-            Container(
-              width: isIncomingOnly ? 226 : null,
-              child: _buildConnStatusMsg(),
-            ),
-            if (!isIncomingOnly) startServiceWidget(),
-            if (!isIncomingOnly) setupServerWidget(),
-          ],
-        );
-
-    return Container(
-      height: height,
-      child: Obx(() => isIncomingOnly
-          ? Column(
-              children: [
-                basicWidget(),
-                Align(
-                        child: startServiceWidget(),
-                        alignment: Alignment.centerLeft)
-                    .marginOnly(top: 2.0, left: 22.0),
-              ],
-            )
-          : basicWidget()),
-    ).paddingOnly(right: isIncomingOnly ? 8 : 0);
-  }
-
-  _buildConnStatusMsg() {
-    widget.onSvcStatusChanged?.call();
-    return Text(
-      _svcStopped.value
-          ? translate("Service is not running")
-          : stateGlobal.svcStatus.value == SvcStatus.connecting
-              ? translate("connecting_status")
-              : stateGlobal.svcStatus.value == SvcStatus.notReady
-                  ? translate("not_ready_status")
-                  : translate('Ready'),
-      style: TextStyle(fontSize: em),
+        ],
+      ),
     );
   }
 
@@ -270,74 +197,44 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 12, left: 12),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: SvgPicture.asset(
-                'assets/logo.svg',
-                width: 100,
-                height: 25,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(60),
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: Padding(
+                padding: EdgeInsets.only(left: 12, top: 12),
+                child: SvgPicture.asset(
+                  'assets/logo.svg',
+                  width: 100,
+                  height: 25,
+                ),
               ),
             ),
           ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Text(
-                    translate("Your Desktop"),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+          body: Column(
+            children: [
+              Center(
+                child: Text(
+                  translate("Your Desktop"),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-                SizedBox(height: 10),
-                Center(
-                  child: Text(
-                    translate("desk_tip"),
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+              ),
+              SizedBox(height: 10),
+              Center(
+                child: Text(
+                  translate("desk_tip"),
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.2))),
-            ),
-            child: Obx(() => Row(
-              children: [
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: stateGlobal.svcStatus.value == SvcStatus.ready
-                        ? Color.fromARGB(255, 50, 190, 166) // зелено
-                        : Color.fromARGB(255, 224, 79, 95), // червено
-                  ),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  stateGlobal.svcStatus.value == SvcStatus.ready
-                      ? "Свързан"
-                      : "Няма връзка със сървъра",
-                  style: TextStyle(
-                    color: stateGlobal.svcStatus.value == SvcStatus.ready
-                        ? Color.fromARGB(255, 50, 190, 166)
-                        : Color.fromARGB(255, 224, 79, 95),
-                  ),
-                ),
-              ],
-            )),
-          ),
-        ],
-      ),
+        ),
+        OnlineStatusWidget(),
+      ],
     );
   }
 
