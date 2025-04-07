@@ -59,11 +59,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
   Widget build(BuildContext context) {
     final isIncomingOnly = bind.isIncomingOnly();
     return Scaffold(
-      body: Row(
-        children: [
-          Expanded(child: buildLeftPane(context)),
-        ],
-      ),
+      body: buildLeftPane(context),
     );
   }
 
@@ -83,8 +79,11 @@ class _DesktopHomePageState extends State<DesktopHomePage>
           child: loadPowered(context),
         ),
       Align(
-        alignment: Alignment.center,
-        child: loadLogo(),
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: EdgeInsets.only(left: 12, top: 12),
+          child: loadLogo(),
+        ),
       ),
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
@@ -108,21 +107,17 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         },
       ),
       buildPluginEntry(),
+      Divider(),
+      OnlineStatusWidget(
+        onSvcStatusChanged: () {
+          if (isInHomePage()) {
+            Future.delayed(Duration(milliseconds: 300), () {
+              _updateWindowSize();
+            });
+          }
+        },
+      ).marginOnly(bottom: 6, right: 6)
     ];
-    if (isIncomingOnly) {
-      children.addAll([
-        Divider(),
-        OnlineStatusWidget(
-          onSvcStatusChanged: () {
-            if (isInHomePage()) {
-              Future.delayed(Duration(milliseconds: 300), () {
-                _updateWindowSize();
-              });
-            }
-          },
-        ).marginOnly(bottom: 6, right: 6)
-      ]);
-    }
     final textColor = Theme.of(context).textTheme.titleLarge?.color;
     return ChangeNotifierProvider.value(
       value: gFFI.serverModel,
