@@ -270,36 +270,76 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 12,
-          left: 12,
-          child: SvgPicture.asset(
-            'assets/logo.svg',
-            width: 100,
-            height: 25,
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 12, top: 12),
+            child: SvgPicture.asset(
+              'assets/logo.svg',
+              width: 100,
+              height: 25,
+            ),
           ),
         ),
-        Column(
-          children: [
-            SizedBox(height: 60), // Add space for the logo
-            Center(
-              child: Text(
-                translate("Your Desktop"),
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    translate("Your Desktop"),
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Center(
+                  child: Text(
+                    translate("desk_tip"),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-            Center(
-              child: Text(
-                translate("desk_tip"),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            decoration: BoxDecoration(
+              border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.2))),
             ),
-          ],
-        ),
-      ],
+            child: Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: stateGlobal.svcStatus.value == SvcStatus.ready
+                        ? Color.fromARGB(255, 50, 190, 166) // зелено
+                        : Color.fromARGB(255, 224, 79, 95), // червено
+                  ),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  stateGlobal.svcStatus.value == SvcStatus.ready
+                      ? "Свързан"
+                      : "Няма връзка със сървъра",
+                  style: TextStyle(
+                    color: stateGlobal.svcStatus.value == SvcStatus.ready
+                        ? Color.fromARGB(255, 50, 190, 166)
+                        : Color.fromARGB(255, 224, 79, 95),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
