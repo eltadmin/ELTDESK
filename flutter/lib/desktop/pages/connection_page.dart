@@ -270,26 +270,24 @@ class _ConnectionPageState extends State<ConnectionPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 12, top: 12),
-            child: SvgPicture.asset(
-              'assets/logo.svg',
-              width: 100,
-              height: 25,
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 12, left: 12),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: SvgPicture.asset(
+                'assets/logo.svg',
+                width: 100,
+                height: 25,
+              ),
             ),
           ),
-        ),
-      ),
-      body: Column(
-        children: [
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                   child: Text(
@@ -312,7 +310,7 @@ class _ConnectionPageState extends State<ConnectionPage>
             decoration: BoxDecoration(
               border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.2))),
             ),
-            child: Row(
+            child: Obx(() => Row(
               children: [
                 Container(
                   width: 8,
@@ -336,7 +334,7 @@ class _ConnectionPageState extends State<ConnectionPage>
                   ),
                 ),
               ],
-            ),
+            )),
           ),
         ],
       ),
